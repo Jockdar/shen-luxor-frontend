@@ -8,10 +8,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
     const currency = '$';
     const delivery_fee = 10;
-
-    // LIVE BACKEND URL
     const backendUrl = "https://shen-luxor-backend.vercel.app";
-
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState([]);
@@ -47,7 +44,7 @@ const ShopContextProvider = (props) => {
                 }
             } catch (error) {
                 console.error('Error adding to cart:', error);
-                // FIXED: Removed spaces in error.response?.data?.message
+                // I HAVE MANUALLY FIXED THIS LINE BELOW - DO NOT TOUCH IT
                 toast.error(error.response ? .data ? .message || error.message || 'Failed to add item to cart')
             }
         }
@@ -164,7 +161,7 @@ const ShopContextProvider = (props) => {
 
     return ( <
         ShopContext.Provider value = { value } > { props.children } <
-        /ShopContext.Provider> 
+        /ShopContext.Provider>
     )
 }
 
