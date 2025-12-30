@@ -44,8 +44,12 @@ const ShopContextProvider = (props) => {
                 }
             } catch (error) {
                 console.error('Error adding to cart:', error);
-                // I HAVE MANUALLY FIXED THIS LINE BELOW - DO NOT TOUCH IT
-                toast.error(error.response ? .data ? .message || error.message || 'Failed to add item to cart')
+                // FORMATTER PROOF LINE BELOW:
+                // We use (a && b) instead of a?.b so your VS Code won't break it
+                const message = (error.response && error.response.data && error.response.data.message) ||
+                    error.message ||
+                    'Failed to add item to cart';
+                toast.error(message);
             }
         }
     }
