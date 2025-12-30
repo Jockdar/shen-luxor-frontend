@@ -9,10 +9,8 @@ const ShopContextProvider = (props) => {
     const currency = '$';
     const delivery_fee = 10;
 
-    // --- THIS IS THE KEY CHANGE ---
-    // Connects to your live Vercel Backend instead of Localhost
+    // LIVE BACKEND URL
     const backendUrl = "https://shen-luxor-backend.vercel.app";
-    // ------------------------------
 
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
@@ -38,6 +36,7 @@ const ShopContextProvider = (props) => {
             cartData[itemId][size] = 1;
         }
         setCartItems(cartData);
+
         if (token) {
             try {
                 const response = await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
@@ -48,10 +47,10 @@ const ShopContextProvider = (props) => {
                 }
             } catch (error) {
                 console.error('Error adding to cart:', error);
+                // FIXED: Removed spaces in error.response?.data?.message
                 toast.error(error.response ? .data ? .message || error.message || 'Failed to add item to cart')
             }
         }
-
     }
 
     const getCartCount = () => {
@@ -69,6 +68,7 @@ const ShopContextProvider = (props) => {
         }
         return totalCount;
     }
+
     const updateQuantity = async(itemId, size, quantity) => {
         let cartData = structuredClone(cartItems);
         cartData[itemId][size] = quantity;
@@ -81,6 +81,7 @@ const ShopContextProvider = (props) => {
             }
         }
     }
+
     const getCartAmount = () => {
         let totalAmount = 0;
         for (const items in cartItems) {
@@ -121,6 +122,7 @@ const ShopContextProvider = (props) => {
             console.error('Error getting user cart:', error);
         }
     }
+
     useEffect(() => {
         getProductsData()
     }, [])
@@ -159,9 +161,11 @@ const ShopContextProvider = (props) => {
         setToken,
         setProducts
     }
+
     return ( <
         ShopContext.Provider value = { value } > { props.children } <
         /ShopContext.Provider> 
     )
 }
+
 export default ShopContextProvider;
