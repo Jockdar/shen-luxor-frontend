@@ -1,0 +1,53 @@
+/* Import only the luxury fonts we need (Lato & Playfair) */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@400;600;700&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* THE AZZA FAHMY BASE STYLES */
+
+body {
+    background-color: #F9F8F3;
+    /* Warm Cream Background */
+    color: #1A1A1A;
+    /* Soft Charcoal Text (Luxury Standard) */
+    font-family: 'Lato', sans-serif;
+    /* Clean font for reading */
+    overflow-x: hidden;
+}
+
+
+/* Force all Headings to be the "Fancy" font */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo {
+    font-family: 'Playfair Display', serif;
+}
+
+
+/* Keep original utility for active links */
+
+a.active hr {
+    display: block;
+}
+
+
+/* Hide scrollbar for sleekness */
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+@media(max-width:640px) {
+    a.active {
+        background-color: #1A1A1A;
+        /* Updated to match our soft black */
+        color: #F9F8F3;
+    }
+}
